@@ -8,10 +8,7 @@ git clone https://github.com/punchlemon/push_swap
 cd push_swap
 ```
 ```bash
-git submodule init
-```
-```bash
-git submodule update --remote --recursive
+git submodule update --init --remote --recursive
 ```
 ## Execution
 ```bash

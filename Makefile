@@ -6,7 +6,7 @@
 #    By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 20:23:46 by retanaka          #+#    #+#              #
-#    Updated: 2024/05/31 12:05:37 by retanaka         ###   ########.fr        #
+#    Updated: 2024/06/01 23:49:17 by retanaka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ CC				=	cc
 RM				=	rm -f
 AR				=	ar rcs
 
-CFLAGS			=	-Wall -Werror -Wextra
+CFLAGS			=	-Wall -Werror -Wextra -g -fsanitize=address,undefined
 IFLAGS			=	-I $(INCLUDE) -I $(FTPRINTF)/$(INCLUDE) \
-					-I $(FTPRINTF)/$(LIBFT)/$(INCLUDE) \
+					-I $(FTPRINTF)/$(LIBFT) \
 
 # Colors
 DEF_COLOR		=	\033[0;39m
@@ -38,6 +38,30 @@ WHITE			=	\033[0;97m
 
 SRC_FILES		=	 \
 					main \
+					create_stacks \
+					delete_stacks \
+					set_stacks \
+					print_stacks \
+					duplicate_stacks \
+					map_rank_stacks \
+					s_stacks \
+					p_stacks \
+					r_stacks \
+					rr_stacks \
+					check_stacks \
+					create_stack \
+					delete_stack \
+					add_stack \
+					remove_stack \
+					get_i_num_from_stack \
+					print_stack \
+					duplicate_stack \
+					create_num \
+					delete_num \
+					compare_num \
+					print_num \
+					print_space \
+					read_op \
 
 SRC				=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ				=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

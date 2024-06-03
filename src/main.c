@@ -6,21 +6,26 @@
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/05/31 12:08:57 by retanaka         ###   ########.fr       */
+/*   Updated: 2024/06/02 00:05:46 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 #include "ft_printf.h"
 
-int	main(int argc, char *argv[])
+int	main(int argc, char **argv)
 {
-	int	i;
+	t_stacks	*stacks;
 
-	i = 0;
-	while (i < argc)
+	stacks = create_stacks();
+	set_stacks(stacks, argc, argv);
+	print_stacks(stacks);
+	while (read_op(&stacks))
 	{
-		ft_printf("%s\n", argv[i]);
-		i++;
+		print_stacks(stacks);
+		if (check_stacks(stacks))
+			break ;
 	}
+	delete_stacks(stacks);
 	return (0);
 }

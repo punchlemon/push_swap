@@ -38,29 +38,18 @@ WHITE			=	\033[0;97m
 
 SRC_FILES		=	 \
 					main \
-					create_stacks \
-					delete_stacks \
 					set_stacks \
-					print_stacks \
-					duplicate_stacks \
-					map_rank_stacks \
-					s_stacks \
-					p_stacks \
-					r_stacks \
-					rr_stacks \
+					add_remove_stack \
+					get_i_num_from_stack \
+					create_stacks \
 					check_stacks \
 					create_stack \
-					delete_stack \
-					add_stack \
-					remove_stack \
-					get_i_num_from_stack \
-					print_stack \
-					duplicate_stack \
 					create_num \
-					delete_num \
-					compare_num \
-					print_num \
-					print_space \
+					map_rank \
+					set_op \
+					sp \
+					r \
+					rr \
 					read_op \
 
 SRC				=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

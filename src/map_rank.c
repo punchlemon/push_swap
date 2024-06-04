@@ -23,20 +23,20 @@ size_t	count_low(t_stacks *stacks, t_num *num)
 	i = sep->next;
 	while (i != sep)
 	{
-		result += compare_num(i, num);
+		result += i->iter < num->iter;
 		i = i->next;
 	}
 	sep = stacks->b->sep;
 	i = sep->next;
 	while (i != sep)
 	{
-		result += compare_num(i, num);
+		result += i->iter < num->iter;
 		i = i->next;
 	}
 	return (result);
 }
 
-void	map_rank_stacks(t_stacks **stacks)
+void	map_rank(t_stacks **stacks)
 {
 	t_stacks	*dup;
 	t_num		*sep;

@@ -38,12 +38,23 @@ typedef struct s_stacks
 	size_t	size;
 }	t_stacks;
 
+typedef struct s_op
+{
+	char	*s;
+	void	(*f)(t_stacks **);
+}	t_op;
+
+typedef struct s_ops
+{
+	t_op	*a;
+	size_t	size;
+}	t_ops;
+
 t_stacks	*create_stacks(void);
 void		delete_stacks(t_stacks *stacks);
 void		set_stacks(t_stacks *stacks, int argc, char **argv);
 void		print_stacks(t_stacks *stacks);
 t_stacks	*duplicate_stacks(t_stacks *stacks);
-void		map_rank_stacks(t_stacks **stacks);
 t_stack		*create_stack(void);
 void		delete_stack(t_stack *stack);
 void		add_head_stack(t_stack *stack, t_num *num);
@@ -56,21 +67,23 @@ void		print_stack(t_stack *stack);
 t_stack		*duplicate_stack(t_stack *stack);
 t_num		*create_num(int iter);
 void		delete_num(t_num *num);
-size_t		compare_num(t_num *low, t_num *high);
 void		print_num(t_num *num);
 void		print_space(void);
-void		sa_stacks(t_stacks *stacks);
-void		sb_stacks(t_stacks *stacks);
-void		ss_stacks(t_stacks *stacks);
-void		pa_stacks(t_stacks *stacks);
-void		pb_stacks(t_stacks *stacks);
-void		ra_stacks(t_stacks *stacks);
-void		rb_stacks(t_stacks *stacks);
-void		rr_stacks(t_stacks *stacks);
-void		rra_stacks(t_stacks *stacks);
-void		rrb_stacks(t_stacks *stacks);
-void		rrr_stacks(t_stacks *stacks);
-size_t		read_op(t_stacks **stacks);
+void		set_ops(t_op *ops);
+void		sa(t_stacks **stacks);
+void		sb(t_stacks **stacks);
+void		ss(t_stacks **stacks);
+void		pa(t_stacks **stacks);
+void		pb(t_stacks **stacks);
+void		ra(t_stacks **stacks);
+void		rb(t_stacks **stacks);
+void		rr(t_stacks **stacks);
+void		rra(t_stacks **stacks);
+void		rrb(t_stacks **stacks);
+void		rrr(t_stacks **stacks);
+void		map_rank(t_stacks **stacks);
+size_t		read_op(t_op *ops, t_stacks **stacks);
+size_t		check_ops_exe(char *s, t_op *ops, t_stacks **stacks);
 size_t		check_stacks(t_stacks *stacks);
 
 #endif

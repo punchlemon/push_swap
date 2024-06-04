@@ -11,19 +11,21 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "ft_printf.h"
 
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
+	t_op		ops[11];
 
+	set_ops(ops);
 	stacks = create_stacks();
 	set_stacks(stacks, argc, argv);
-	print_stacks(stacks);
-	while (read_op(&stacks))
+	while (1)
 	{
 		print_stacks(stacks);
 		if (check_stacks(stacks))
+			break ;
+		if (read_op(ops, &stacks))
 			break ;
 	}
 	delete_stacks(stacks);

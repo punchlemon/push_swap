@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "ft_printf.h"
 
 t_num	*create_num(int iter)
 {
@@ -24,4 +25,33 @@ t_num	*create_num(int iter)
 		result->next = result;
 	}
 	return (result);
+}
+
+void	delete_num(t_num *num)
+{
+	if (num != NULL)
+	{
+		num->prev = NULL;
+		num->iter = 0;
+		num->next = NULL;
+		free(num);
+	}
+}
+
+void	print_num(t_num *n)
+{
+	size_t	i;
+
+	i = ft_printf("|%d", n->iter);
+	while (i++ < 12)
+		ft_printf(" ");
+}
+
+void	print_space(void)
+{
+	size_t	i;
+
+	i = ft_printf("|");
+	while (i++ < 12)
+		ft_printf(" ");
 }

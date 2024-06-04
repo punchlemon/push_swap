@@ -12,12 +12,28 @@
 
 #include "push_swap.h"
 
-void	pa_stacks(t_stacks *stacks)
+void	pa(t_stacks **stacks)
 {
-	add_head_stack(stacks->a, remove_head_stack(stacks->b));
+	add_head_stack((*stacks)->a, remove_head_stack((*stacks)->b));
 }
 
-void	pb_stacks(t_stacks *stacks)
+void	pb(t_stacks **stacks)
 {
-	add_head_stack(stacks->b, remove_head_stack(stacks->a));
+	add_head_stack((*stacks)->b, remove_head_stack((*stacks)->a));
+}
+
+void	sa(t_stacks **stacks)
+{
+	add_head_stack((*stacks)->a, remove_secd_stack((*stacks)->a));
+}
+
+void	sb(t_stacks **stacks)
+{
+	add_head_stack((*stacks)->b, remove_secd_stack((*stacks)->b));
+}
+
+void	ss(t_stacks **stacks)
+{
+	sa(stacks);
+	sb(stacks);
 }

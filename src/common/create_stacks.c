@@ -80,5 +80,5 @@ void	print_stacks(t_stacks *stacks)
 		ft_printf("|\n");
 		i++;
 	}
-	ft_printf("-------------------------\n\n");
+	ft_printf("-------------------------\n");
 }

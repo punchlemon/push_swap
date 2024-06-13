@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_op.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/03 19:23:41 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/03 19:33:07 by retanaka         ###   ########.fr       */
+/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
+/*   Updated: 2024/06/05 10:41:40 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "ft_printf.h"
+#include "get_next_line.h"
 
-void	clear_buf(char *buf, size_t len)
+int	main(int argc, char **argv)
 {
-	size_t	i;
+	t_stacks	*stacks;
+	t_op		ops[11];
 
-	i = 0;
-	while (i < len)
-		buf[i++] = 0;
-}
-
-size_t	read_op(t_op *ops, t_stacks **stacks)
-{
-	char	buf[21];
-
-	clear_buf(buf, 21);
-	read(1, buf, 20);
-	if (check_ops_exe(buf, ops, stacks))
-		return (1);
+	set_ops(ops);
+	stacks = create_stacks();
+	set_stacks(stacks, argc, argv);
+	map_rank(&stacks);
+	write_op(ops, &stacks);
+	delete_stacks(stacks);
 	return (0);
 }

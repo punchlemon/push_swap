@@ -1,4 +1,5 @@
 # push_swap
+## Overview
 You have 2 stacks and have to sort the numbers with the stacks.
 ## Installation
 ```bash
@@ -8,7 +9,7 @@ git clone https://github.com/punchlemon/push_swap
 cd push_swap
 ```
 ```bash
-git submodule update --init --remote --recursive
+sh init.sh
 ```
 ## Execution
 ```bash

@@ -1,0 +1,11 @@
+git clone https://github.com/punchlemon/get_next_line.git
+git clone https://github.com/punchlemon/ft_printf.git
+mkdir -p src/get_next_line
+mkdir -p src/ft_printf
+mv get_next_line/get_next_line_bonus.c src/get_next_line
+mv get_next_line/get_next_line_utils_bonus.c src/get_next_line
+mv get_next_line/get_next_line_bonus.h include
+mv ft_printf/src/*.c src/ft_printf
+mv ft_printf/include/ft_printf.h include
+rm -rf get_next_line
+rm -rf ft_printf

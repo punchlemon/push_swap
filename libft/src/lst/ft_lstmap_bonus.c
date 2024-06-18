@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/04/22 12:09:10 by retanaka          #+#    #+#             */
+/*   Updated: 2024/04/23 06:58:14 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	t_list	*map;
+	t_list	*new;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	if (lst == NULL || f == NULL || del == NULL)
+		return (NULL);
+	map = NULL;
+	while (lst != NULL)
+	{
+		new = ft_lstnew((*f)(lst -> content));
+		if (new == NULL)
+		{
+			ft_lstclear(&lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&map, new);
+		lst = lst -> next;
+	}
+	return (map);
 }

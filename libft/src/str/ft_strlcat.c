@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/04/16 16:25:44 by retanaka          #+#    #+#             */
+/*   Updated: 2024/04/23 08:51:43 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	size_t	dlen;
+	size_t	slen;
+	size_t	i;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	slen = ft_strlen(src);
+	if (dstsize == 0)
+		return (slen);
+	dlen = ft_strlen(dst);
+	if (dstsize <= dlen)
+		return (dstsize + slen);
+	i = 0;
+	while (src[i] != '\0' && dlen + i < dstsize - 1)
+	{
+		dst[dlen + i] = src[i];
+		i++;
+	}
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
 }

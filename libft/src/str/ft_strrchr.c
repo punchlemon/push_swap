@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/04/15 15:29:32 by retanaka          #+#    #+#             */
+/*   Updated: 2024/04/23 08:11:44 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	char	*last;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	last = NULL;
+	s--;
+	while (*++s)
+		if (*s == (c & 0xff))
+			last = (char *)s;
+	if (!(c & 0xff))
+		return ((char *)s);
+	return ((char *)last);
 }

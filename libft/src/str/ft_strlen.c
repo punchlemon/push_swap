@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2023/10/09 08:25:15 by retanaka          #+#    #+#             */
+/*   Updated: 2024/05/29 17:02:01 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	size_t		i;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	i = -1;
+	while (*(s + ++i))
+		;
+	return (i);
 }

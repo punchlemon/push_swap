@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/04/20 07:34:00 by retanaka          #+#    #+#             */
+/*   Updated: 2024/04/23 07:44:43 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	unsigned int	i;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	if (s == NULL || f == NULL)
+		return ;
+	i = 0;
+	while (*s)
+		(*f)(i++, s++);
 }

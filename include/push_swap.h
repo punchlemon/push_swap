@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <limits.h>
 
 typedef struct s_num
@@ -46,7 +47,7 @@ typedef struct s_op
 
 typedef struct s_ops
 {
-	t_op	*a;
+	t_op	*sep;
 	size_t	size;
 }	t_ops;
 
@@ -83,12 +84,11 @@ void		rrb(t_stacks **stacks);
 void		rrr(t_stacks **stacks);
 void		map_rank(t_stacks **stacks);
 size_t		read_op(t_op *ops, t_stacks **stacks);
-size_t		write_op(t_op *ops, t_stacks **stacks);
+size_t		solve_op(t_stacks **stacks, char **str, int fd);
 size_t		check_ops_exe(char *s, t_op *ops, t_stacks **stacks);
+size_t		check_exe(t_stacks **stacks, char *s);
+void		execute_op(t_stacks **stacks, int fd);
 size_t		check_stacks(t_stacks *stacks);
-size_t		exe_op(t_op *ops, t_stacks **stacks);
-t_op		*get_op(t_op *ops, char *s);
-t_op		*get_op2(t_op *ops, char *s);
 size_t		print_error(void);
 
 #endif

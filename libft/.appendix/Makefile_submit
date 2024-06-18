@@ -1,0 +1,169 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/05/29 19:53:52 by retanaka          #+#    #+#              #
+#    Updated: 2024/06/13 15:09:43 by retanaka         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME							=	libft.a
+SRC_DIR							=	./
+OBJ_DIR							=	obj/
+BONUS_OBJ_DIR					=	bonus_obj/
+CC								=	cc
+CFLAGS							=	-Wall -Wextra -Werror
+RM								=	rm -f
+AR								=	ar rcs
+
+# Colors
+DEF_COLOR						=	\033[0;39m
+GRAY							=	\033[0;90m
+RED								=	\033[0;91m
+GREEN							=	\033[0;92m
+YELLOW							=	\033[0;93m
+BLUE							=	\033[0;94m
+MAGENTA							=	\033[0;95m
+CYAN							=	\033[0;96m
+WHITE							=	\033[0;97m
+
+SRC_FILES						= 	 \
+									ft_isalpha \
+									ft_isdigit \
+									ft_isalnum \
+									ft_isascii \
+									ft_isprint \
+									ft_bzero \
+									ft_calloc \
+									ft_memset \
+									ft_memcpy \
+									ft_memmove \
+									ft_memchr \
+									ft_memcmp \
+									ft_putchar_fd \
+									ft_putstr_fd \
+									ft_putendl_fd \
+									ft_putnbr_fd \
+									ft_strlen \
+									ft_strlcpy \
+									ft_strlcat \
+									ft_strchr \
+									ft_strrchr \
+									ft_strncmp \
+									ft_strnstr \
+									ft_strdup \
+									ft_strjoin \
+									ft_strtrim \
+									ft_substr \
+									ft_split \
+									ft_strmapi \
+									ft_striteri \
+									ft_toupper \
+									ft_tolower \
+									ft_atoi \
+									ft_itoa \
+
+BONUS_FILES						=	 \
+									ft_lstnew_bonus \
+									ft_lstadd_front_bonus \
+									ft_lstsize_bonus \
+									ft_lstlast_bonus \
+									ft_lstadd_back_bonus \
+									ft_lstdelone_bonus \
+									ft_lstclear_bonus \
+									ft_lstiter_bonus \
+									ft_lstmap_bonus \
+
+SRCS							=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+BONUS_SRCS						=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(BONUS_FILES)))
+OBJS 							=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+BONUS_OBJS						=	$(addprefix $(BONUS_OBJ_DIR), $(addsuffix .o, $(BONUS_FILES)))
+OBJ_FLAG						=	.obj_f
+BONUS_OBJ_FLAG					=	.bonus_obj_f
+
+$(OBJ_DIR)%.o:						$(SRC_DIR)%.c | $(OBJ_FLAG)
+									$(call compile)
+
+$(BONUS_OBJ_DIR)%.o:				$(SRC_DIR)%.c | $(BONUS_OBJ_FLAG)
+									$(call compile_bonus)
+
+$(OBJ_FLAG):
+									@mkdir -p $(OBJ_DIR)
+
+$(BONUS_OBJ_FLAG):
+									@mkdir -p $(BONUS_OBJ_DIR)
+
+OBJS_LEN						=	$(words $(OBJS))
+BONUS_OBJS_LEN					=	$(words $(BONUS_OBJS))
+COMPILED_OBJS_LEN				=	0
+COMPILED_BONUS_OBJS_LEN			=	0
+
+PROGRESS_BAR_LENGTH				=	40
+
+define compile
+	$(eval COMPILED_OBJS_LEN=$(shell echo $$(($(COMPILED_OBJS_LEN)+1))))
+	@$(call update_progress,$(COMPILED_OBJS_LEN),$(OBJS_LEN), "Libft\ Compiling")
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+endef
+
+define compile_bonus
+	$(eval COMPILED_BONUS_OBJS_LEN=$(shell echo $$(($(COMPILED_BONUS_OBJS_LEN)+1))))
+	@$(call update_progress,$(COMPILED_BONUS_OBJS_LEN),$(BONUS_OBJS_LEN), "Libft\ bonus\ Compiling")
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+endef
+
+define update_progress
+	$(eval BAR_LENGTH=$(shell echo "scale=0; $(PROGRESS_BAR_LENGTH) *$1 / $2" | bc))
+	$(eval REMAINING_LENGTH=$(shell echo "$(PROGRESS_BAR_LENGTH) - $(BAR_LENGTH)" | bc))
+	$(eval PERCENT=$(shell echo "scale=2; 100 * $1 / $2" | bc))
+	@printf "\033[?25l" # Hide cursor
+	@printf "\r" # Move cursor to the beginning of the line
+	@printf "$(DEF_COLOR)$3\r\033[40C|$(DEF_COLOR)"
+	@i=0; \
+	while [ $$i -lt $(BAR_LENGTH) ]; do \
+		printf "\033[42m%0.s $(DEF_COLOR)" $$i; \
+		i=$$(($$i+1)); \
+	done # Progress bar
+	@i=0; \
+	while [ $$i -lt $(REMAINING_LENGTH) ]; do \
+		printf "\033[0m%0.s $(DEF_COLOR)" $$i; \
+		i=$$(($$i+1)); \
+	done # Remaining bar
+	@printf "$(DEF_COLOR)| $(PERCENT)%%$(DEF_COLOR)"
+endef
+
+all:								$(NAME)
+									@ranlib $(NAME)
+									@printf "\r"
+									@printf " Libft Compiled!       \n"
+									@printf "\033[?25h" # Show cursor
+
+$(NAME):							$(OBJS)
+									@$(AR) $(NAME) $(OBJS)
+
+bonus:								all $(BONUS_OBJS)
+									@$(AR) $(NAME) $(BONUS_OBJS)
+									@ranlib $(NAME)
+									@printf "\r"
+									@printf " Libft bonus Compiled! \n"
+									@printf "\033[?25h" # Show cursor
+
+clean:
+									@$(RM) -r $(OBJ_DIR)
+									@$(RM) -r $(BONUS_OBJ_DIR)
+									@echo "$(BLUE)Libft objects files Cleaned!$(DEF_COLOR)"
+
+fclean:								clean
+									@$(RM) $(NAME)
+									@echo "$(CYAN)Libft executable files Cleaned!$(DEF_COLOR)"
+
+re:									fclean all
+									@echo "$(GREEN)Cleaned and Rebuilt everything for Libft!$(DEF_COLOR)"
+
+norm:
+									@norminette $(SRCS) $(INCLUDES) | grep -v Norme -B1 || true
+
+.PHONY: all bonus extend clean fclean re norm

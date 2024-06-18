@@ -1,0 +1,22 @@
+mkdir -p include src/is src/lst src/mem src/put src/str src/to
+mv ft_is* src/is
+mv ft_lst* src/lst
+mv ft_mem* src/mem
+mv ft_put* src/put
+mv ft_str* src/str
+mv ft_to* src/to
+mv libft.h include
+mv ft_bzero.c src/mem
+mv ft_calloc.c src/mem
+mv ft_split.c src/str
+mv ft_substr.c src/str
+mv ft_itoa.c src/to
+mv ft_atoi.c src/to
+mv Makefile .appendix/Makefile_submit
+mv .appendix/Makefile_normal Makefile
+mv .appendix/init.sh .
+mv .appendix/remove.sh .
+mv .appendix/normal.sh .
+mv .appendix/submit.sh .
+mv .appendix/README.md .
+mv .appendix/.gitignore .

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/05/10 13:53:02 by retanaka          #+#    #+#             */
+/*   Updated: 2024/05/14 12:17:16 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-int	main(int argc, char **argv)
+int	ft_putchar(char c)
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	return (write(1, &c, 1));
+}
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+int	ft_putstr(char *s)
+{
+	size_t	i;
+
+	if (s == NULL)
+		return (write(1, "(null)", 6));
+	i = -1;
+	while (*(s + ++i) != '\0')
+		;
+	return (write(1, s, i));
 }

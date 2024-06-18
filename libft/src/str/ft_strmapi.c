@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: retanaka <retanaka@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/29 16:15:34 by retanaka          #+#    #+#             */
-/*   Updated: 2024/06/14 12:46:02 by retanaka         ###   ########.fr       */
+/*   Created: 2024/04/20 04:39:36 by retanaka          #+#    #+#             */
+/*   Updated: 2024/04/23 08:06:52 by retanaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_stacks	*stacks;
-	t_op		ops[11];
+	size_t	s_len;
+	char	*p;
+	size_t	i;
 
-	set_ops(ops);
-	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	read_op(ops, &stacks);
-	delete_stacks(stacks);
-	return (0);
+	if (s == NULL || f == NULL)
+		return (NULL);
+	s_len = ft_strlen(s);
+	p = (char *)malloc((s_len + 1) * sizeof(char));
+	if (p == NULL)
+		return (NULL);
+	p[s_len] = '\0';
+	i = 0;
+	while (i < s_len)
+	{
+		p[i] = (*f)(i, s[i]);
+		i++;
+	}
+	return (p);
 }

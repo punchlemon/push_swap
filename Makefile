@@ -44,7 +44,7 @@ WHITE					=	\033[0;97m
 
 SOLVE_SRC_FILES			=	 \
 							main \
-							write_op \
+							solve \
 
 COMMON_SRC_FILES		=	 \
 							create_num \
@@ -131,21 +131,20 @@ endef
 define update_progress
 	$(eval BAR_LENGTH=$(shell echo "scale=0; $(PROGRESS_BAR_LENGTH) *$1 / $2" | bc))
 	$(eval REMAINING_LENGTH=$(shell echo "$(PROGRESS_BAR_LENGTH) - $(BAR_LENGTH)" | bc))
-	$(eval PERCENT=$(shell echo "scale=2; 100 * $1 / $2" | bc))
 	@printf "\033[?25l" # Hide cursor
 	@printf "\r" # Move cursor to the beginning of the line
-	@printf "$(DEF_COLOR)$3\r\033[40C|$(DEF_COLOR)"
+	@printf "$(DEF_COLOR)$3\r\033[40C[$(DEF_COLOR)"
 	@i=0; \
 	while [ $$i -lt $(BAR_LENGTH) ]; do \
-		printf "\033[42m%0.s $(DEF_COLOR)" $$i; \
+		printf "$(RED)=$(DEF_COLOR)"; \
 		i=$$(($$i+1)); \
 	done # Progress bar
 	@i=0; \
 	while [ $$i -lt $(REMAINING_LENGTH) ]; do \
-		printf "\033[0m%0.s $(DEF_COLOR)" $$i; \
+		printf "$(GRAY)-$(DEF_COLOR)"; \
 		i=$$(($$i+1)); \
 	done # Remaining bar
-	@printf "$(DEF_COLOR)| $(PERCENT)%%$(DEF_COLOR)"
+	@printf "$(DEF_COLOR)] %2d / %2d $(DEF_COLOR)" $1 $2;
 endef
 
 all:				$(NAME)

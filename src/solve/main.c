@@ -17,13 +17,22 @@
 int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
-	t_op		ops[11];
+	char		*str;
+	int			fd;
 
-	set_ops(ops);
 	stacks = create_stacks();
 	set_stacks(stacks, argc, argv);
 	map_rank(&stacks);
-	write_op(ops, &stacks);
+	print_stacks(stacks);
+	str = NULL;
+	system("touch str");
+	fd = open("str", O_WRONLY);
+	solve_op(&stacks, &str, fd);
+	close(fd);
+	fd = open("str", O_RDONLY);
+	execute_op(&stacks, fd);
+	print_stacks(stacks);
 	delete_stacks(stacks);
+	close(fd);
 	return (0);
 }

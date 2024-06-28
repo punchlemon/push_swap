@@ -13,6 +13,19 @@
 #include "push_swap.h"
 #include "ft_printf.h"
 
+void	init_stacks(t_stacks *stacks)
+{
+	stacks->a->s = "sa\n";
+	stacks->a->p = "pa\n";
+	stacks->a->r = "ra\n";
+	stacks->a->rr = "rra\n";
+	stacks->b->s = "sb\n";
+	stacks->b->p = "pb\n";
+	stacks->b->r = "rb\n";
+	stacks->b->rr = "rrb\n";
+	stacks->size = 0;
+}
+
 t_stacks	*create_stacks(void)
 {
 	t_stacks	*result;
@@ -33,7 +46,7 @@ t_stacks	*create_stacks(void)
 			free(result);
 			return (NULL);
 		}
-		result->size = 0;
+		init_stacks(result);
 	}
 	return (result);
 }
@@ -55,6 +68,7 @@ t_stacks	*duplicate_stacks(t_stacks *stacks)
 	delete_stack(result->b);
 	result->a = duplicate_stack(stacks->a);
 	result->b = duplicate_stack(stacks->b);
+	init_stacks(result);
 	result->size = result->a->len + result->b->len;
 	return (result);
 }

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "get_next_line.h"
 
 void	clear_buf(char *buf, size_t len)
 {

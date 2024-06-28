@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 #include "ft_printf.h"
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	main(int argc, char **argv)
 {
@@ -22,17 +22,20 @@ int	main(int argc, char **argv)
 
 	stacks = create_stacks();
 	set_stacks(stacks, argc, argv);
+	// print_stacks(stacks);
 	map_rank(&stacks);
-	print_stacks(stacks);
+	// print_stacks(stacks);
 	str = NULL;
-	system("touch str");
-	fd = open("str", O_WRONLY);
-	solve_op(&stacks, &str, fd);
+	system("touch .str");
+	fd = open(".str", O_WRONLY);
+	solve_op(stacks, &str, fd);
 	close(fd);
-	fd = open("str", O_RDONLY);
-	execute_op(&stacks, fd);
-	print_stacks(stacks);
+	fd = open(".str", O_RDONLY);
+	// print_stacks(stacks);
+	ft_printf("%s", str);
 	delete_stacks(stacks);
+	free(str);
 	close(fd);
+	system("rm .str");
 	return (0);
 }

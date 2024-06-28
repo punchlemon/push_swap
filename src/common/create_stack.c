@@ -48,6 +48,7 @@ void	delete_stack(t_stack *stack)
 			delete_num(i);
 			i = next;
 		}
+		delete_num(sep);
 		stack->sep = NULL;
 		stack->len = 0;
 		free(stack);

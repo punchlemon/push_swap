@@ -31,14 +31,14 @@ size_t	check_stacks(t_stacks *stacks)
 	t_num	*i;
 
 	if (stacks->b->len != 0)
-		return (print_ko());
+		return (1);
 	sep = stacks->a->sep;
 	i = sep->next;
 	while (i != sep && i->next != sep)
 	{
 		if (i->iter >= i->next->iter)
-			return (print_ko());
+			return (0);
 		i = i->next;
 	}
-	return (print_ok());
+	return (1);
 }

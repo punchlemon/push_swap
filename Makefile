@@ -153,7 +153,7 @@ all:				$(NAME)
 					@printf "\033[?25h" # Show cursor
 
 $(NAME):			$(LIBFT)/$(LIBFT_A) $(COMMON_A) $(SOLVE_OBJS)
-					@$(CC) $(CFLAGS) $(IFLAGS) $(COMMON_A) $(SOLVE_OBJS) $(LIBFT)/$(LIBFT_A) -o $(NAME)
+					@$(CC) $(CFLAGS) $(IFLAGS) $(SOLVE_OBJS) $(COMMON_A) $(LIBFT)/$(LIBFT_A) -o $(NAME)
 
 $(COMMON_A):		$(COMMON_OBJS)
 					@$(AR) $(COMMON_A) $(COMMON_OBJS)

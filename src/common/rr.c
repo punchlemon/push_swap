@@ -12,17 +12,17 @@
 
 #include "push_swap.h"
 
-void	rra(t_stacks **stacks)
+void	rra(t_stacks *stacks)
 {
-	add_head_stack((*stacks)->a, remove_tail_stack((*stacks)->a));
+	add_head_stack(stacks->a, remove_tail_stack(stacks->a));
 }
 
-void	rrb(t_stacks **stacks)
+void	rrb(t_stacks *stacks)
 {
-	add_head_stack((*stacks)->b, remove_tail_stack((*stacks)->b));
+	add_head_stack(stacks->b, remove_tail_stack(stacks->b));
 }
 
-void	rrr(t_stacks **stacks)
+void	rrr(t_stacks *stacks)
 {
 	rra(stacks);
 	rrb(stacks);

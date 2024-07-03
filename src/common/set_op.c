@@ -47,7 +47,7 @@ void	exe(t_stacks *stacks, char *s, char **str)
 void	execute_op(t_stacks *stacks, int fd)
 {
 	char	*s;
-	
+
 	while (1)
 	{
 		s = get_next_line(fd);

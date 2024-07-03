@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "ft_printf.h"
 
 void	add_head_stack(t_stack *stack, t_num *num)
 {

@@ -12,7 +12,6 @@
 
 #include "push_swap.h"
 #include "libft.h"
-#include <stdio.h>
 
 void	add_str(char **str, char *s)
 {
@@ -34,19 +33,16 @@ void	radix_sort(t_stacks *stacks, char **str, int dgt)
 	t_num	*sep;
 	size_t	i;
 	size_t	j;
-	size_t	len;
 
 	if (dgt > 0)
 		radix_sort(stacks, str, dgt - 1);
 	sep = stacks->a->sep;
-	len = stacks->size;
-	num = sep->next;
 	i = 0;
 	j = 0;
-	while (j < len)
+	while (j < stacks->size)
 	{
 		num = sep->next;
-		if (num->iter & (1<<dgt))
+		if (num->iter & (1 << dgt))
 			exe(stacks, "ra\n", str);
 		else
 		{
@@ -57,9 +53,7 @@ void	radix_sort(t_stacks *stacks, char **str, int dgt)
 	}
 	while (i--)
 		exe(stacks, "pa\n", str);
-
 }
-
 
 size_t	solve_op(t_stacks *stacks, char **str, int fd)
 {
@@ -72,8 +66,13 @@ size_t	solve_op(t_stacks *stacks, char **str, int fd)
 		return (1);
 	dgt = 0;
 	max = stacks->size - 1;
-	while (max >>= 1)
+	while (1)
+	{
+		max >>= 1;
+		if (!max)
+			break ;
 		dgt++;
+	}
 	radix_sort(stacks, str, dgt);
 	write(fd, *str, ft_strlen(*str));
 	return (0);

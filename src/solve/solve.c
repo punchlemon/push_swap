@@ -55,7 +55,7 @@ void	radix_sort(t_stacks *stacks, char **str, int dgt)
 		exe(stacks, "pa\n", str);
 }
 
-size_t	solve_op(t_stacks *stacks, char **str, int fd)
+size_t	solve_op(t_stacks *stacks, char **str)
 {
 	int		dgt;
 	size_t	max;
@@ -64,6 +64,11 @@ size_t	solve_op(t_stacks *stacks, char **str, int fd)
 		return (*str = ft_strdup(""), 1);
 	if (stacks == NULL)
 		return (1);
+	if (stacks->size < 6)
+	{
+		opt_sort(stacks, str);
+		return (0);
+	}
 	dgt = 0;
 	max = stacks->size - 1;
 	while (1)
@@ -74,7 +79,6 @@ size_t	solve_op(t_stacks *stacks, char **str, int fd)
 		dgt++;
 	}
 	radix_sort(stacks, str, dgt);
-	write(fd, *str, ft_strlen(*str));
 	return (0);
 }
 

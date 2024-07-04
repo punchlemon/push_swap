@@ -18,21 +18,15 @@ int	main(int argc, char **argv)
 {
 	t_stacks	*stacks;
 	char		*str;
-	int			fd;
 
 	stacks = create_stacks();
-	set_stacks(stacks, argc, argv);
-	map_rank(&stacks);
+	if (set_stacks(stacks, argc, argv))
+		return (write(2, "Error\n", 6), 1);
 	str = NULL;
-	system("touch .str");
-	fd = open(".str", O_WRONLY);
-	solve_op(stacks, &str, fd);
-	close(fd);
-	fd = open(".str", O_RDONLY);
+	map_rank(&stacks);
+	solve_op(stacks, &str);
 	ft_printf("%s", str);
 	delete_stacks(stacks);
 	free(str);
-	close(fd);
-	system("rm .str");
 	return (0);
 }

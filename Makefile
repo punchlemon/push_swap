@@ -45,6 +45,7 @@ WHITE					=	\033[0;97m
 SOLVE_SRC_FILES			=	 \
 							main \
 							solve \
+							opt_sort \
 
 COMMON_SRC_FILES		=	 \
 							create_num \

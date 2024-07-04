@@ -66,7 +66,8 @@ t_stack	*duplicate_stack(t_stack *stack)
 	i = sep->next;
 	while (i != sep)
 	{
-		add_tail_stack(result, create_num(i->iter));
+		add_tail_stack(result, create_num(i->num));
+		result->sep->prev->iter = i->iter;
 		i = i->next;
 	}
 	return (result);

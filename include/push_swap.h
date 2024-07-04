@@ -22,6 +22,7 @@
 typedef struct s_num
 {
 	struct s_num	*prev;
+	int				num;
 	size_t			iter;
 	struct s_num	*next;
 }	t_num;
@@ -58,7 +59,7 @@ typedef struct s_ops
 void		init_stacks(t_stacks *stacks);
 t_stacks	*create_stacks(void);
 void		delete_stacks(t_stacks *stacks);
-void		set_stacks(t_stacks *stacks, int argc, char **argv);
+int			set_stacks(t_stacks *stacks, int argc, char **argv);
 void		print_stacks(t_stacks *stacks);
 t_stacks	*duplicate_stacks(t_stacks *stacks);
 t_stack		*create_stack(void);
@@ -90,7 +91,7 @@ void		rrr(t_stacks *stacks);
 void		add_str(char **str, char *s);
 void		map_rank(t_stacks **stacks);
 size_t		read_op(t_op *ops, t_stacks **stacks);
-size_t		solve_op(t_stacks *stacks, char **str, int fd);
+size_t		solve_op(t_stacks *stacks, char **str);
 void		exe(t_stacks *stacks, char *s, char **str);
 size_t		check_ops_exe(char *s, t_op *ops, t_stacks **stacks);
 size_t		check_exe(t_stacks *stacks, char *s);
@@ -99,5 +100,6 @@ size_t		check_stacks(t_stacks *stacks);
 size_t		print_error(void);
 void		devide_b(t_stacks *stacks, char **str, size_t start, size_t len);
 void		devide_a(t_stacks *stacks, char **str, size_t start, size_t len);
+void		opt_sort(t_stacks *stacks, char **str);
 
 #endif

@@ -31,7 +31,7 @@ size_t	check_stacks(t_stacks *stacks)
 	t_num	*i;
 
 	if (stacks->b->len != 0)
-		return (1);
+		return (0);
 	sep = stacks->a->sep;
 	i = sep->next;
 	while (i != sep && i->next != sep)

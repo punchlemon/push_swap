@@ -77,9 +77,11 @@ void	print_stacks(t_stacks *stacks)
 {
 	size_t	i;
 
-	ft_printf("-------------------------\n");
-	ft_printf("|     a     |     b     |\n");
-	ft_printf("-------------------------\n");
+	ft_printf("|===================================================|\n");
+	ft_printf("|            a            |            b            |\n");
+	ft_printf("|=========================|=========================|\n");
+	ft_printf("| iter       : num        | iter       : num        |\n");
+	ft_printf("|------------:------------|------------:------------|\n");
 	i = 0;
 	while (i < stacks->size)
 	{
@@ -94,5 +96,5 @@ void	print_stacks(t_stacks *stacks)
 		ft_printf("|\n");
 		i++;
 	}
-	ft_printf("-------------------------\n");
+	ft_printf("|===================================================|\n");
 }

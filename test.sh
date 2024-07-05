@@ -1,7 +1,7 @@
 #!/bin/bash
 NBR_COUNT=5
 ##
-for i in `seq 500`
+for i in `seq 1`
 do
 NBR=$(seq 1 $NBR_COUNT | sort -R | tr '\n' ' ' | rev | cut -c 2- | rev)
 #NBR="0 1 2 3 4 5 6 7 8 9"
@@ -21,4 +21,4 @@ else
 echo "Operations: $CMD_COUNT"
 fi
 done
-# open "https://kaaaaakun.github.io/push-swap-pain/?&nbr=$NBR_LINK&cmd=$CMD_LINK"
+open "https://kaaaaakun.github.io/push-swap-pain/?&nbr=$NBR_LINK&cmd=$CMD_LINK"

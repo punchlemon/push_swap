@@ -13,20 +13,17 @@ void	count_up_status(int (*status)[N])
 			i++;
 		else
 		{
-			if (i > 0)
+			while (i--)
 			{
-				while (i--)
-					if ((*status)[i] < 3)
-						return ((*status)[i]++, (void)0);
-					else
-						(*status)[i] = 1;
-				i = 0;
-				while (++i < N)
-					if ((*status)[i] == 0)
-						return ((*status)[i] = 1, (void)0);
+				if ((*status)[i] < 3)
+					return ((*status)[i]++, (void)0);
+				else
+					(*status)[i] = 1;
 			}
-			else
-				return ((*status)[i]++, (void)0);
+			i = -1;
+			while (++i < N)
+				if ((*status)[i] == 0)
+					return ((*status)[i] = 1, (void)0);
 		}
 	}
 }

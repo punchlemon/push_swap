@@ -26,7 +26,7 @@ RM						=	rm -f
 AR						=	ar rcs
 
 CFLAGS					=	-Wall -Werror -Wextra
-CFLAGS					+=	-g -fsanitize=address,undefined
+# CFLAGS					+=	-g -fsanitize=address,undefined
 IFLAGS					=	 \
 							-I$(INCLUDE) \
 							-I$(LIBFT)/$(INCLUDE) \
@@ -161,6 +161,9 @@ $(COMMON_A):		$(COMMON_OBJS)
 					@printf "\r"
 					@printf " Push_swap common.a Compiled!$(DEF_COLOR)\n"
 					@printf "\033[?25h" # Show cursor
+
+val:				re
+					@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG) > valgrind_result.log 2>&1
 
 bonus:				$(CHECKER)
 					@printf "\r"

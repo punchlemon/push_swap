@@ -54,7 +54,7 @@ int	check_dup_stacks(t_stacks *stacks)
 		while (num2 != sep)
 		{
 			if (num1->num == num2->num)
-				return (1);
+				return (delete_stacks(stacks), 1);
 			num2 = num2->next;
 		}
 		num1 = num1->next;

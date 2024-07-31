@@ -66,7 +66,7 @@ int	set_stacks(t_stacks *stacks, int argc, char **argv)
 {
 	int	num;
 
-	if (argc <= 2)
+	if (argc < 2)
 		return (delete_stacks(stacks), 1);
 	else
 	{

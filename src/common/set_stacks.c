@@ -24,7 +24,7 @@ int	ft_atoi_revised(const char *str, int *num)
 	if (*str == '+' || *str == '-')
 		str++;
 	*num = 0;
-	while (*str)
+	while (1)
 	{
 		if (*str < '0' || *str > '9')
 			return (1);
@@ -36,6 +36,8 @@ int	ft_atoi_revised(const char *str, int *num)
 			return (*num = -2147483648, 0);
 		*num = *num * 10 + (*str - '0');
 		str++;
+		if (!*str)
+			break ;
 	}
 	return (*num *= sign, 0);
 }

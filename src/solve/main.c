@@ -20,6 +20,8 @@ int	main(int argc, char **argv)
 	char		*str;
 
 	stacks = create_stacks();
+	if (argc == 1)
+		return (0);
 	if (set_stacks(stacks, argc, argv))
 		return (write(2, "Error\n", 6), 1);
 	str = NULL;

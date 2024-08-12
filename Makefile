@@ -16,7 +16,7 @@ COMMON_A				=	common.a
 INCLUDE					=	include
 LIBFT					=	libft
 LIBFT_A					=	libft.a
-SRC_DIR					=	src/
+SRC_DIR					=	src
 SOLVE_DIR				=	solve/
 COMMON_DIR				=	common/
 CHECKER_DIR				=	checker/
@@ -66,9 +66,9 @@ CHECKER_SRC_FILES		=	 \
 							main \
 							read_op \
 
-SOLVE_SRCS				=	$(addprefix $(SRC_DIR), $(addprefix $(SOLVE_DIR), $(addsuffix .c, $(SOLVE_SRC_FILES))))
-COMMON_SRCS				=	$(addprefix $(SRC_DIR), $(addprefix $(COMMON_DIR), $(addsuffix .c, $(COMMON_SRC_FILES))))
-CHECKER_SRCS			=	$(addprefix $(SRC_DIR), $(addprefix $(CHECKER_DIR), $(addsuffix .c, $(BONUS_SRC_FILES))))
+SOLVE_SRCS				=	$(addprefix $(SRC_DIR)/, $(addprefix $(SOLVE_DIR), $(addsuffix .c, $(SOLVE_SRC_FILES))))
+COMMON_SRCS				=	$(addprefix $(SRC_DIR)/, $(addprefix $(COMMON_DIR), $(addsuffix .c, $(COMMON_SRC_FILES))))
+CHECKER_SRCS			=	$(addprefix $(SRC_DIR)/, $(addprefix $(CHECKER_DIR), $(addsuffix .c, $(BONUS_SRC_FILES))))
 SOLVE_OBJS				=	$(addprefix $(OBJ_DIR), $(addprefix $(SOLVE_DIR), $(addsuffix .o, $(SOLVE_SRC_FILES))))
 COMMON_OBJS				=	$(addprefix $(OBJ_DIR), $(addprefix $(COMMON_DIR), $(addsuffix .o, $(COMMON_SRC_FILES))))
 CHECKER_OBJS			=	$(addprefix $(OBJ_DIR), $(addprefix $(CHECKER_DIR), $(addsuffix .o, $(CHECKER_SRC_FILES))))
@@ -81,13 +81,13 @@ SOLVE_OBJ_FLAG			=	.solve_obj_f
 COMMON_OBJ_FLAG			=	.common_obj_f
 CHECKER_OBJ_FLAG		=	.checker_obj_f
 
-$(OBJ_DIR)$(SOLVE_DIR)%.o:		$(SRC_DIR)$(SOLVE_DIR)%.c | $(SOLVE_OBJ_FLAG)
+$(OBJ_DIR)$(SOLVE_DIR)%.o:		$(SRC_DIR)/$(SOLVE_DIR)%.c | $(SOLVE_OBJ_FLAG)
 								$(call compile_solve)
 
-$(OBJ_DIR)$(COMMON_DIR)%.o:		$(SRC_DIR)$(COMMON_DIR)%.c | $(COMMON_OBJ_FLAG)
+$(OBJ_DIR)$(COMMON_DIR)%.o:		$(SRC_DIR)/$(COMMON_DIR)%.c | $(COMMON_OBJ_FLAG)
 								$(call compile_common)
 
-$(OBJ_DIR)$(CHECKER_DIR)%.o:	$(SRC_DIR)$(CHECKER_DIR)%.c | $(CHECKER_OBJ_FLAG)
+$(OBJ_DIR)$(CHECKER_DIR)%.o:	$(SRC_DIR)/$(CHECKER_DIR)%.c | $(CHECKER_OBJ_FLAG)
 								$(call compile_checker)
 
 $(OBJ_FLAG):
@@ -162,7 +162,7 @@ $(COMMON_A):		$(COMMON_OBJS)
 					@printf " Push_swap common.a Compiled!$(DEF_COLOR)\n"
 					@printf "\033[?25h" # Show cursor
 
-val:				re
+val:
 					@valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) $(ARG) > valgrind_result.log 2>&1
 
 bonus:				$(CHECKER)
@@ -174,13 +174,13 @@ $(CHECKER):			$(LIBFT)/$(LIBFT_A) $(COMMON_A) $(CHECKER_OBJS)
 					@$(CC) $(CFLAGS) $(IFLAGS) $(COMMON_A) $(CHECKER_OBJS) $(LIBFT)/$(LIBFT_A) -o $(CHECKER)
 
 $(LIBFT)/$(LIBFT_A):
-					@make extend -C $(LIBFT)
+					@make --no-print-directory extend -C $(LIBFT)
 
 libft_clean:
-					@make clean -C $(LIBFT)
+					@make --no-print-directory clean -C $(LIBFT)
 
 libft_fclean:
-					@make fclean -C $(LIBFT)
+					@make --no-print-directory fclean -C $(LIBFT)
 
 push_swap_clean:
 					@$(RM) -r $(OBJ_DIR)
@@ -196,6 +196,16 @@ re:					fclean all
 					@echo "$(GREEN)Cleaned and Rebuilt everything for Push_swap!$(DEF_COLOR)"
 
 norm:
-					@norminette $(SRC) $(INCLUDE) | grep -v Norme -B1 || true
+					@$(call check_norminette, $(SRC_DIR))
+					@$(call check_norminette, $(INCLUDE))
+					@$(call check_norminette, $(LIBFT))
+
+define check_norminette
+					@if norminette $1 | grep -q Error!; then \
+						norminette $1 | grep Error! | sed -E 's/^[^\\]*\\([^\\]*)\\.*(.{7})/\1\2/'; \
+					else \
+						echo "$1: OK!"; \
+					fi
+endef
 
 .PHONY:				all bonus clean fclean re norm
